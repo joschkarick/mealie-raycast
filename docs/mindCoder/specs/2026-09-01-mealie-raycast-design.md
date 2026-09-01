@@ -84,7 +84,10 @@ Fehlerdiagnose.
 - `GET /api/households/mealplans` mit `start_date`/`end_date` (ISO `YYYY-MM-DD`).
 - Felder: `id` (**Integer**, nicht UUID), `date`, `entryType`, `title`, `text`,
   `recipeId`, eingebettetes `recipe`-Objekt.
-- `entryType` ist eines von `breakfast`, `lunch`, `dinner`, `side`.
+- `entryType`: Die OpenAPI-Spec (geprüft am 2026-09-01) kennt sieben Werte:
+  `breakfast`, `lunch`, `dinner`, `side`, `snack`, `drink`, `dessert`. In den
+  Live-Daten der Zielinstanz war nur `dinner` belegt. Die Extension bietet alle
+  sieben an; lehnt eine ältere Instanz einen Wert ab, zeigt der Fehler-Toast den Grund.
 - Ein Eintrag ist entweder rezeptbasiert (`recipeId`) oder frei (`title`/`text`).
   Beides muss anlegbar sein.
 
