@@ -42,24 +42,52 @@ Danach in `package.json` eintragen und `npm run lint` muss sauber durchlaufen.
 
 ### 2. Store-Screenshots
 
-Der Store verlangt Screenshots unter `metadata/`. Die lassen sich nur aus der
-laufenden Extension heraus erzeugen, dafür braucht es die Raycast-Oberfläche.
+Quelle: https://developers.raycast.com/basics/prepare-an-extension-for-store,
+abgerufen am 2026-09-01. Es gibt **keine** Aktion "Create Screenshot" im
+Action-Panel, eine fruehere Fassung dieser Datei behauptete das faelschlich.
 
-Vorgehen: `npm run dev` starten, den jeweiligen Command öffnen, im Action-Panel
-(`Cmd+K`) die Aktion **Create Screenshot** auswählen. Raycast legt die Datei
-selbst im richtigen Format unter `metadata/` ab.
+Der Weg ab Raycast 1.37.0:
+
+1. **Window Capture** in den **Advanced Preferences** einrichten und einen
+   Hotkey vergeben, die Doku nennt als Beispiel `Cmd+Shift+Alt+M`.
+2. Die Extension muss im **Development Mode** laufen (`npm run dev`).
+   Window Capture blendet dann die Dev-Menues und -Icons aus dem Bild.
+3. Den gewuenschten Command oeffnen.
+4. Hotkey druecken und dabei **"Save to Metadata"** ankreuzen. Raycast legt
+   die Datei selbst korrekt unter `metadata/` ab.
+
+Window Capture verwendet den **aktuellen Desktop-Hintergrund** als Bildhintergrund.
+Vorher einen kontrastreichen Hintergrund setzen und fuer alle Screenshots
+denselben verwenden.
+
+Vorgaben:
+
+| Punkt | Wert |
+|---|---|
+| Groesse | 2000 x 1250 Pixel, Querformat |
+| Seitenverhaeltnis | 16:10 |
+| Format | PNG |
+| Anzahl | maximal 6, mindestens 3 empfohlen |
+| Light und Dark mischen | nein |
+
+Weitere Regeln aus der Doku: keine anderen Anwendungen im Bild, nicht mehrere
+verschiedene Hintergruende ueber die Screenshots hinweg.
 
 Sinnvolle Motive, je einen pro Command:
 
 1. `Search Recipes` mit Suchergebnissen
 2. `Add to Shopping List` mit sichtbaren Label-Tags neben den Foods
 3. `Shopping Lists` mit den nach Label gruppierten Sektionen
-4. `Meal Plan` mit einer gefüllten Woche
+4. `Meal Plan` mit einer gefuellten Woche
 5. Der Tagesauswahl-Screen aus `Cmd+M`
 
-Achtung: Auf den Screenshots ist der Inhalt deiner Instanz zu sehen. Das Repo
-ist öffentlich, und Store-Screenshots sind es ohnehin. Vor dem Hochladen kurz
-prüfen, dass nichts Privates drauf ist.
+**Datenschutz-Hinweis, woertlich aus der Doku:** Screenshots sind im Store
+sichtbar und liegen zusaetzlich im oeffentlichen Repository
+`raycast/extensions`. Ueber die Git-Historie bleiben sie auch dann abrufbar,
+wenn ein Bild spaeter ausgetauscht wird. Betroffen waeren deine Rezeptnamen,
+deine Einkaufslisten samt Inhalt und dein Wochen-Essensplan. Wer das vermeiden
+will, nimmt die Screenshots gegen eine zweite Instanz oder gegen eigens
+angelegte Wegwerf-Eintraege auf.
 
 ## Publikation
 
