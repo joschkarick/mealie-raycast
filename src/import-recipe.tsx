@@ -2,6 +2,7 @@ import { useEffect, useState } from "react";
 import { Action, ActionPanel, Clipboard, Detail, Form, Icon, Toast, showToast, useNavigation } from "@raycast/api";
 import { showFailureToast } from "@raycast/utils";
 import { ConfigErrorView } from "./components/ConfigErrorView";
+import { AddIngredientsAction } from "./components/AddIngredientsAction";
 import { PlanRecipeAction } from "./components/PlanRecipeAction";
 import { useGroupSlug, useMealie } from "./hooks/useMealie";
 import { getRecipe, importRecipeFromUrl } from "./api/recipes";
@@ -101,6 +102,7 @@ function ImportResult({ recipe, baseUrl, sourceUrl }: { recipe: RecipeSummary; b
             <Action.OpenInBrowser title="Open in Mealie" url={recipeWebUrl(baseUrl, groupSlug, recipe.slug)} />
           )}
           {client && <PlanRecipeAction client={client} recipe={recipe} />}
+          {client && <AddIngredientsAction client={client} recipe={recipe} />}
           <Action.OpenInBrowser title="Open Original Source" url={sourceUrl} />
         </ActionPanel>
       }

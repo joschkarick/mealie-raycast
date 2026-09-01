@@ -40,6 +40,14 @@ Festgehalten am 2026-09-01 waehrend der Umsetzung:
   Attrappe in `src/` und werden in ihrer jeweiligen Task ersetzt.
 - **`onError` braucht einen Block-Body.** `showFailureToast` liefert
   `Promise<Toast>`, `onError` erwartet `void | Promise<void>`.
+- **Task 12 aufgeteilt.** Der Meal-Plan-Teil liegt in `PlanRecipeAction.tsx`,
+  der Einkaufslisten-Teil in `AddIngredientsAction.tsx`, statt beides in einer
+  Komponente `AddRecipeActions`. Beide sind in `search-recipes.tsx` und
+  `import-recipe.tsx` verdrahtet.
+- **`quantity`-Default ist 0, nicht 1.** In den Live-Daten der Zielinstanz haben
+  drei von vier Items `quantity: 0`; Mealie zeigt dann den blanken Namen.
+- **Store-Readiness ist unvollstaendig.** Author-Handle und Screenshots fehlen,
+  beides braucht Joschka. Siehe `STORE-CHECKLIST.md`.
 - **`ray lint` meldet `Invalid author`.** Der Handle in der `package.json` ist
   nicht gegen das Raycast-Nutzerverzeichnis geprueft. Betrifft nur Lint und eine
   spaetere Store-Publikation, nicht Entwicklung oder Build.
