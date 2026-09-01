@@ -93,7 +93,11 @@ async function readDetail(response: Response): Promise<string | undefined> {
 async function toMealieError(response: Response): Promise<MealieError> {
   const status = response.status;
   if (status === 401 || status === 403) {
-    return new MealieError("Your Mealie API token was rejected. Check it in the extension preferences.", "auth", status);
+    return new MealieError(
+      "Your Mealie API token was rejected. Check it in the extension preferences.",
+      "auth",
+      status,
+    );
   }
   if (status === 404) {
     return new MealieError("Mealie returned 404. Check that the URL points at a Mealie instance.", "notFound", status);

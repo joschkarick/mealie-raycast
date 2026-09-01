@@ -1066,7 +1066,9 @@ export default function SearchRecipes() {
     execute: client !== undefined,
     keepPreviousData: true,
     initialData: [] as RecipeSummary[],
-    onError: (error) => showFailureToast(error, { title: "Could not load recipes" }),
+    onError: (error) => {
+      showFailureToast(error, { title: "Could not load recipes" });
+    },
   });
 
   if (configError) return <ConfigErrorView error={configError} />;
@@ -1103,7 +1105,6 @@ export default function SearchRecipes() {
                 <Action.CopyToClipboard
                   title="Copy Mealie Link"
                   content={recipeWebUrl(config!.baseUrl, groupSlug, recipe.slug)}
-                  shortcut={{ modifiers: ["cmd"], key: "." }}
                 />
               )}
             </ActionPanel>
@@ -1822,7 +1823,9 @@ export default function AddToShoppingList() {
   const { data: lists, isLoading } = useCachedPromise(() => getShoppingLists(client!), [], {
     execute: client !== undefined,
     initialData: [] as ShoppingList[],
-    onError: (error) => showFailureToast(error, { title: "Could not load shopping lists" }),
+    onError: (error) => {
+      showFailureToast(error, { title: "Could not load shopping lists" });
+    },
   });
 
   const { data: lastListId } = useCachedPromise(async () => (await LocalStorage.getItem<string>(LAST_LIST_KEY)) ?? "");
@@ -1958,7 +1961,11 @@ export function ShoppingListItems({ client, listId, listName }: Props) {
   const { data, isLoading, mutate, revalidate } = useCachedPromise(
     (id: string) => getShoppingList(client, id),
     [listId],
-    { onError: (error) => showFailureToast(error, { title: "Could not load the list" }) },
+    {
+      onError: (error) => {
+        showFailureToast(error, { title: "Could not load the list" });
+      },
+    },
   );
 
   const open = (data?.listItems ?? []).filter((item) => !item.checked);
@@ -2116,7 +2123,9 @@ export default function ShoppingLists() {
   const { data, isLoading, revalidate } = useCachedPromise(() => getShoppingLists(client!), [], {
     execute: client !== undefined,
     initialData: [] as ShoppingList[],
-    onError: (error) => showFailureToast(error, { title: "Could not load shopping lists" }),
+    onError: (error) => {
+      showFailureToast(error, { title: "Could not load shopping lists" });
+    },
   });
 
   if (configError) return <ConfigErrorView error={configError} />;
@@ -2545,7 +2554,9 @@ export function RecipePicker({ client, navigationTitle, onPick, onPickFreeText }
   const { data, isLoading } = useCachedPromise((term: string) => searchRecipes(client, term), [searchText], {
     keepPreviousData: true,
     initialData: [] as RecipeSummary[],
-    onError: (error) => showFailureToast(error, { title: "Could not load recipes" }),
+    onError: (error) => {
+      showFailureToast(error, { title: "Could not load recipes" });
+    },
   });
 
   const trimmed = searchText.trim();
@@ -2622,7 +2633,9 @@ export default function MealPlan() {
       execute: client !== undefined,
       initialData: [] as MealPlanEntry[],
       keepPreviousData: true,
-      onError: (error) => showFailureToast(error, { title: "Could not load the meal plan" }),
+      onError: (error) => {
+      showFailureToast(error, { title: "Could not load the meal plan" });
+    },
     },
   );
 
