@@ -2,6 +2,7 @@ import { useState } from "react";
 import { Action, ActionPanel, Icon, List } from "@raycast/api";
 import { showFailureToast, useCachedPromise } from "@raycast/utils";
 import { ConfigErrorView } from "./components/ConfigErrorView";
+import { PlanRecipeAction } from "./components/PlanRecipeAction";
 import { useGroupSlug, useMealie } from "./hooks/useMealie";
 import { searchRecipes } from "./api/recipes";
 import { recipeImageUrl, recipeWebUrl } from "./lib/urls";
@@ -48,6 +49,7 @@ export default function SearchRecipes() {
                 />
               )}
               {recipe.orgURL && <Action.OpenInBrowser title="Open Original Source" url={recipe.orgURL} />}
+              {client && <PlanRecipeAction client={client} recipe={recipe} />}
               {groupSlug && (
                 <Action.CopyToClipboard
                   title="Copy Mealie Link"
