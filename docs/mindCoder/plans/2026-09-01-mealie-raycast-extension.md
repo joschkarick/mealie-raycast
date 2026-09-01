@@ -23,6 +23,27 @@ Diese Regeln gelten für **jede** Task. Sie werden nicht in jeder Task wiederhol
 7. **TDD:** Für jede Logik in `src/api/` und `src/lib/` zuerst der fehlschlagende Test, dann die Implementierung. UI-Komponenten werden nicht unit-getestet.
 8. **Commit nach jeder Task**, Conventional-Commits-Präfix (`feat:`, `test:`, `chore:`, `docs:`, `fix:`).
 
+## Abweichungen bei der Ausfuehrung
+
+Festgehalten am 2026-09-01 waehrend der Umsetzung:
+
+- **Reihenfolge geaendert.** Nach Task 6 wurde Task 10 (Essensplan) vorgezogen,
+  weil Joschka die Rezept-Action "auf einen Tag einplanen" angefordert hat und
+  diese an der Essensplan-API haengt. Die Tasks 7 bis 9 (Einkaufslisten) folgen
+  danach.
+- **`PlanRecipeAction` statt des Meal-Plan-Teils von `AddRecipeActions`.** Die
+  Action liegt in `src/components/PlanRecipeAction.tsx` und ist bereits in
+  `search-recipes.tsx` verdrahtet. Task 12 muss davon nur noch den
+  Einkaufslisten-Teil ergaenzen, nicht die ganze Komponente.
+- **Platzhalter-Commands.** `ray build` verlangt fuer jeden Eintrag in der
+  `package.json` eine Datei. Die noch nicht gebauten Commands liegen als
+  Attrappe in `src/` und werden in ihrer jeweiligen Task ersetzt.
+- **`onError` braucht einen Block-Body.** `showFailureToast` liefert
+  `Promise<Toast>`, `onError` erwartet `void | Promise<void>`.
+- **`ray lint` meldet `Invalid author`.** Der Handle in der `package.json` ist
+  nicht gegen das Raycast-Nutzerverzeichnis geprueft. Betrifft nur Lint und eine
+  spaetere Store-Publikation, nicht Entwicklung oder Build.
+
 ## Verifizierte API-Fakten
 
 Gegen `https://demo.mealie.io/openapi.json` am 2026-09-01 geprüft. Diese Werte nicht aus dem Gedächtnis abweichen lassen.
