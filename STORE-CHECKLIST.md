@@ -15,79 +15,24 @@ Stand 2026-09-01. Was für eine Publikation im Raycast Store fehlt und was schon
 - [x] `ray build` läuft durch
 - [x] 57 Unit-Tests grün
 
-## Offen, kann nur Joschka erledigen
+## Erledigt am 2026-09-02
 
-### 1. Author-Handle
+- [x] **Author-Handle.** `joschka_rick`, gegen
+      `https://www.raycast.com/api/v1/users/joschka_rick` geprueft: HTTP 200.
+- [x] **Store-Screenshots.** Fuenf Stueck unter `metadata/mealie-1.png` bis
+      `mealie-5.png`, alle 2000x1250, einheitlicher Hintergrund. Sichtgeprueft:
+      keine Instanz-URL, kein Token, keine Namen oder Mailadressen.
+- [x] **`platforms`-Feld.** Laut Manifest-Doku ein Pflichtfeld, es fehlte.
+      Eingetragen als `["macOS"]`.
 
-`ray lint` bricht ab:
+      Die Extension nutzt **keine** plattformspezifischen APIs: kein
+      AppleScript, kein `child_process`, keine macOS-Pfade. Technisch liefe sie
+      auch unter Windows. Die Einschraenkung ist bewusst gesetzt, weil
+      ausschliesslich auf macOS getestet wurde und `["macOS", "Windows"]` die
+      unbelegte Behauptung waere, Windows funktioniere. Erweitern ist ein
+      Einzeiler in der `package.json`, sobald jemand es dort geprueft hat.
 
-```
-Invalid author "joschkarick"
-404 https://www.raycast.com/api/v1/users/joschkarick
-```
-
-Der Wert in `package.json` unter `author` muss ein existierender Raycast-Handle
-sein. Zu finden in Raycast unter `Cmd+,` im Reiter **Account**, oder auf
-raycast.com nach dem Login in der Profil-URL.
-
-Prüfen lässt sich ein Kandidat so:
-
-```bash
-curl -s -o /dev/null -w "%{http_code}\n" https://www.raycast.com/api/v1/users/DEIN_HANDLE
-```
-
-`200` heißt: existiert. `404` heißt: falscher Handle.
-
-Danach in `package.json` eintragen und `npm run lint` muss sauber durchlaufen.
-
-### 2. Store-Screenshots
-
-Quelle: https://developers.raycast.com/basics/prepare-an-extension-for-store,
-abgerufen am 2026-09-01. Es gibt **keine** Aktion "Create Screenshot" im
-Action-Panel, eine fruehere Fassung dieser Datei behauptete das faelschlich.
-
-Der Weg ab Raycast 1.37.0:
-
-1. **Window Capture** in den **Advanced Preferences** einrichten und einen
-   Hotkey vergeben, die Doku nennt als Beispiel `Cmd+Shift+Alt+M`.
-2. Die Extension muss im **Development Mode** laufen (`npm run dev`).
-   Window Capture blendet dann die Dev-Menues und -Icons aus dem Bild.
-3. Den gewuenschten Command oeffnen.
-4. Hotkey druecken und dabei **"Save to Metadata"** ankreuzen. Raycast legt
-   die Datei selbst korrekt unter `metadata/` ab.
-
-Window Capture verwendet den **aktuellen Desktop-Hintergrund** als Bildhintergrund.
-Vorher einen kontrastreichen Hintergrund setzen und fuer alle Screenshots
-denselben verwenden.
-
-Vorgaben:
-
-| Punkt | Wert |
-|---|---|
-| Groesse | 2000 x 1250 Pixel, Querformat |
-| Seitenverhaeltnis | 16:10 |
-| Format | PNG |
-| Anzahl | maximal 6, mindestens 3 empfohlen |
-| Light und Dark mischen | nein |
-
-Weitere Regeln aus der Doku: keine anderen Anwendungen im Bild, nicht mehrere
-verschiedene Hintergruende ueber die Screenshots hinweg.
-
-Sinnvolle Motive, je einen pro Command:
-
-1. `Search Recipes` mit Suchergebnissen
-2. `Add to Shopping List` mit sichtbaren Label-Tags neben den Foods
-3. `Shopping Lists` mit den nach Label gruppierten Sektionen
-4. `Meal Plan` mit einer gefuellten Woche
-5. Der Tagesauswahl-Screen aus `Cmd+M`
-
-**Datenschutz-Hinweis, woertlich aus der Doku:** Screenshots sind im Store
-sichtbar und liegen zusaetzlich im oeffentlichen Repository
-`raycast/extensions`. Ueber die Git-Historie bleiben sie auch dann abrufbar,
-wenn ein Bild spaeter ausgetauscht wird. Betroffen waeren deine Rezeptnamen,
-deine Einkaufslisten samt Inhalt und dein Wochen-Essensplan. Wer das vermeiden
-will, nimmt die Screenshots gegen eine zweite Instanz oder gegen eigens
-angelegte Wegwerf-Eintraege auf.
+- [x] `npm run lint` laeuft vollstaendig gruen durch (alle fuenf Checks).
 
 ## Publikation
 
