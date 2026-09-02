@@ -136,21 +136,23 @@ export function ShoppingListItems({ client, listId, listName }: Props) {
 
   return (
     <List isLoading={isLoading} navigationTitle={listName} searchBarPlaceholder={"Filter " + listName}>
-      <List.EmptyView
-        icon={Icon.Cart}
-        title="This list is empty"
-        actions={
-          <ActionPanel>
-            <Action
-              icon={Icon.Plus}
-              title="Add Item"
-              onAction={() =>
-                push(<FoodPicker client={client} listId={listId} listName={listName} onAdded={revalidate} />)
-              }
-            />
-          </ActionPanel>
-        }
-      />
+      {!isLoading && (
+        <List.EmptyView
+          icon={Icon.Cart}
+          title="This list is empty"
+          actions={
+            <ActionPanel>
+              <Action
+                icon={Icon.Plus}
+                title="Add Item"
+                onAction={() =>
+                  push(<FoodPicker client={client} listId={listId} listName={listName} onAdded={revalidate} />)
+                }
+              />
+            </ActionPanel>
+          }
+        />
+      )}
       {groups.map((group) => (
         <List.Section key={group.key} title={group.name} subtitle={String(group.items.length)}>
           {group.items.map((item) => (

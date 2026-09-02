@@ -34,6 +34,31 @@ Stand 2026-09-01. Was für eine Publikation im Raycast Store fehlt und was schon
 
 - [x] `npm run lint` laeuft vollstaendig gruen durch (alle fuenf Checks).
 
+## UI/UX-Guidelines, geprueft am 2026-09-02
+
+Quelle: https://developers.raycast.com/basics/prepare-an-extension-for-store,
+Abschnitt "UI/UX Guidelines". Punkt fuer Punkt gegen den Code geprueft.
+
+| Regel | Stand |
+|---|---|
+| Preferences statt eigenem Config-Command | erfuellt |
+| Actions in Title Case | korrigiert, die Mahlzeitentypen im Untermenue waren kleingeschrieben |
+| Ellipse bei Actions mit Untermenue | korrigiert, beide Untermenues hatten keine |
+| Untermenue wiederholt nicht den Eltern-Titel | erfuellt |
+| Icons konsistent innerhalb einer Action-Liste | erfuellt |
+| Navigation-API statt eigenem Stack | erfuellt |
+| Kein `navigationTitle` im Root-Command | korrigiert, `Meal Plan` setzte ihn und aktualisierte ihn beim Blaettern |
+| Kein flackernder Empty State | korrigiert, sechs Listen rendern die EmptyView jetzt erst nach dem Laden |
+| Platzhalter in Suchleiste und Textfeldern | korrigiert, vier Felder hatten keinen |
+| Keine externe Analytik | erfuellt, es gibt keine |
+| US-English, keine eigene Lokalisierung | erfuellt |
+| Neueste API-Version | aktualisiert auf 2.1.3 |
+
+Offen zur Entscheidung: Die Code-Kommentare sind auf Deutsch. Die Guidelines
+sagen dazu nichts, sie regeln nur die Oberflaeche. Fuer ein oeffentliches
+Repository mit internationalen Reviewern waeren englische Kommentare
+naheliegender. Kein Blocker, aber eine bewusste Entscheidung wert.
+
 ## Publikation
 
 Erst wenn beides erledigt ist:
