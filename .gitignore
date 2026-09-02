@@ -7,3 +7,6 @@ dist/
 .env.*
 !.env.example
 coverage/
+
+# Von ray build erzeugt, wie im Raycast-Monorepo ignoriert
+raycast-env.d.ts
